@@ -1,6 +1,6 @@
 # custom-maven-plugin
 
-###Usage:
+Usage:
 
 ```
 mvn clean install
@@ -13,7 +13,7 @@ Now you can use as in any project on your local:
 mvn org.example:generate:archetypeproject
 ```
 
-###Flags that could be used:
+Flags that could be used:
 
 
 ```
