@@ -44,18 +44,15 @@ public class GenerateMojo extends AbstractMojo {
         String command1 = "mvn -T 10C clean install -Dmaven.test.skip -DskipTests -Dmaven.javadoc.skip=true";
         String command11 = "rm -R generate";
         String command2 = "mkdir generate";
-//        String command5 = "cd generate";
-//        String command3 = "mvn archetype:generate -DarchetypeGroupId=com.akqa.aem.blueprint -DarchetypeArtifactId=akqa-project-archetype -DarchetypeVersion=26-SNAPSHOT -DaemVersion=6.5.0 -DappTitle=AEMBlueprint -DappId=\"aemblueprint\" -DgroupId=\"com.aem.blueprint\" -DfrontendModule=y -DincludeExamples=n -DincludeDispatcherConfig=n -DlanguageCountry=\"en_us\" -DsingleCountry=y -DincludeExamples=y -DartifactId=test -DinteractiveMode=false";
-//        String command4 = "";
 
-        getLog().info("--------------------------MVN deploy--------------------------");
+        getLog().info("--------------------------mvn deploy--------------------------");
         generate(command1);
         generate(command11);
-        getLog().info("--------------------------create folder structure--------------------------");
+        getLog().info("--------------------------Create Folder Structure--------------------------");
         generate(command2);
         getLog().info("--------------------------Generate Archetype--------------------------");
         generatearecetype(articatid,groupid,appTitle,appID,singlecountry,languagecountry);
-        getLog().info("--------------------------Deply--------------------------");
+        getLog().info("--------------------------Deploy--------------------------");
         deploy(articatid);
 
     }
@@ -97,7 +94,7 @@ public class GenerateMojo extends AbstractMojo {
     public void  generatearecetype(String articatid, String groupid, String appTitle, String appID, String singlecountry, String languagecountry) {
         try {
             File dir = new File("generate");
-            Process process = Runtime.getRuntime().exec("mvn archetype:generate -DarchetypeGroupId=com.akqa.aem.blueprint -DarchetypeArtifactId=akqa-project-archetype -DarchetypeVersion=26-SNAPSHOT -DaemVersion=6.5.0 -DappTitle="+appTitle+" -DappId="+appID+" -DgroupId="+groupid+" -DfrontendModule=general -DincludeExamples=n -DincludeDispatcherConfig=n -DlanguageCountry=en_us -DsingleCountry=y -DincludeExamples=y -DartifactId="+articatid+" -DinteractiveMode=false", null, dir);
+            Process process = Runtime.getRuntime().exec("mvn archetype:generate -DarchetypeGroupId=com.akqa.aem.blueprint -DarchetypeArtifactId=akqa-project-archetype -DarchetypeVersion=26-SNAPSHOT -DaemVersion=6.5.0 -DappTitle="+appTitle+" -DappId="+appID+" -DgroupId="+groupid+" -DfrontendModule=general -DincludeExamples=y -DincludeDispatcherConfig=n -DlanguageCountry=en_us -DsingleCountry=y -DincludeExamples=y -DartifactId="+articatid+" -DinteractiveMode=false", null, dir);
             getLog().info("after");
             BufferedReader stdInput = new BufferedReader(new
                     InputStreamReader(process.getInputStream()));
@@ -122,9 +119,9 @@ public class GenerateMojo extends AbstractMojo {
             if (exitcode != 0) {
                 getLog().info("Exception");
             }
-            getLog().info("Updated");
+            getLog().info("Updated Archetype");
         } catch (IOException | InterruptedException ioException) {
-            getLog().info("Failed");
+            getLog().info("Failed Updating Archetype");
             ioException.printStackTrace();
         }
     }
@@ -157,79 +154,10 @@ public class GenerateMojo extends AbstractMojo {
             if (exitcode != 0) {
                 getLog().info("Exception");
             }
-            getLog().info("Updated");
+            getLog().info("Deployed");
         } catch (IOException | InterruptedException ioException) {
-            getLog().info("Failed");
+            getLog().info("Failed Deployment");
             ioException.printStackTrace();
         }
     }
-
-
-//    public void generatearecetype(String command) {
-//        try {
-//            Process process = Runtime.getRuntime().exec("./generate-archetype");
-//            getLog().info("after");
-//            BufferedReader stdInput = new BufferedReader(new
-//                    InputStreamReader(process.getInputStream()));
-//
-//            BufferedReader stdError = new BufferedReader(new
-//                    InputStreamReader(process.getErrorStream()));
-//
-//            // Read the output from the command
-//            System.out.println("Here is the standard output of the " + command + ":\n");
-//            String s = null;
-//            while ((s = stdInput.readLine()) != null) {
-//                System.out.println(s);
-//            }
-//
-//            // Read any errors from the attempted command
-//            System.out.println("Here is the standard error of the " + command + " (if any):\n");
-//            while ((s = stdError.readLine()) != null) {
-//                System.out.println(s);
-//            }
-//            int exitcode = process.waitFor();
-//
-//            if (exitcode != 0) {
-//                getLog().info("Exception");
-//            }
-//            getLog().info("Updated");
-//        } catch (IOException | InterruptedException ioException) {
-//            getLog().info("Failed");
-//            ioException.printStackTrace();
-//        }
-//    }
-//
-//    public void deploy(String command) {
-//        try {
-//            Process process = Runtime.getRuntime().exec("./deploy");
-//            getLog().info("after");
-//            BufferedReader stdInput = new BufferedReader(new
-//                    InputStreamReader(process.getInputStream()));
-//
-//            BufferedReader stdError = new BufferedReader(new
-//                    InputStreamReader(process.getErrorStream()));
-//
-//            // Read the output from the command
-//            System.out.println("Here is the standard output of the " + command + ":\n");
-//            String s = null;
-//            while ((s = stdInput.readLine()) != null) {
-//                System.out.println(s);
-//            }
-//
-//            // Read any errors from the attempted command
-//            System.out.println("Here is the standard error of the " + command + " (if any):\n");
-//            while ((s = stdError.readLine()) != null) {
-//                System.out.println(s);
-//            }
-//            int exitcode = process.waitFor();
-//
-//            if (exitcode != 0) {
-//                getLog().info("Exception");
-//            }
-//            getLog().info("Updated");
-//        } catch (IOException | InterruptedException ioException) {
-//            getLog().info("Failed");
-//            ioException.printStackTrace();
-//        }
-//    }
 }
